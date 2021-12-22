@@ -1,0 +1,18 @@
+package BackJoon1463;
+
+import java.util.Scanner;
+
+public class BJ1463 {
+
+	public static void main(String[] args) {
+		int N, result;
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		sc.nextLine();
+		
+		if(N<1 || N>Math.pow(10, 6)) {
+			System.err.println("N이 1보다 같거나 크고 10의6승보다 작거나 같아야 해요");
+		}
+	}
+
+}

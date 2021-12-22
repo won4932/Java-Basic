@@ -1,0 +1,18 @@
+package DP;
+
+import java.util.Scanner;
+
+public class Test {
+	public static void main(String[] args) {
+		int[] dp;
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		dp = new int[N+1];
+		dp[0] = dp[1] = 0;
+		for(int i =2; i<=N; i++) {
+			if(i%2==0) {
+				dp[i] = Math.min(dp[i], dp[i/2]);
+			}
+		}
+	}
+}

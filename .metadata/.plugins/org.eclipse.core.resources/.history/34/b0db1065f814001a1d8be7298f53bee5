@@ -1,0 +1,16 @@
+package BackJoon1463;
+
+import java.util.Scanner;
+
+public class BJ1463 {
+
+	public static void main(String[] args) {
+		int N, result;
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		sc.nextLine();
+		
+		if(N<1 || N>Math.pow(10, 6));
+	}
+
+}

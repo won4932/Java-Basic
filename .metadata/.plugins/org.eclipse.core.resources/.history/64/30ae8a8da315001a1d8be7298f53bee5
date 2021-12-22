@@ -1,0 +1,28 @@
+package DP;
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+ 
+public class BK2579 {
+	static int dp[];
+	static int score[];
+    public static void main(String[] args) {
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	try {
+			int Case = Integer.parseInt(br.readLine());
+			for(int i =0; i<Case; i++) {
+				score[i] = Integer.parseInt(br.readLine());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    static int stair(int n) {
+    	if(n==1) dp[n]=a[n];
+    	return 0;
+    }
+}

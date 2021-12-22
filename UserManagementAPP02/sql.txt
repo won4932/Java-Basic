@@ -1,0 +1,161 @@
+--테이블생성
+CREATE TABLE TB_Member02(
+ m_no varchar2(4) PRIMARY KEY,--회원등록번호
+ m_name varchar2(20) NOT NULL, --이름
+ m_ssn varchar2(14) NOT NULL, --주민번호
+ m_phoneNum varchar2(13), --연락처
+ m_registdate DATE DEFAULT sysdate -- 등록날짜 
+);
+
+--시퀀스생성
+CREATE SEQUENCE seq_member02_no;
+ 
+--테이블, 시퀀스 삭제
+DROP TABLE TB_Member02;
+DROP SEQUENCE seq_member02_no;
+
+--결과 조회
+SELECT * FROM TB_Member02;
+
+--회원 등록
+INSERT INTO TB_Member02 VALUES ('0001','자바킹','123456-1234567','010-0000-0000',sysdate);
+INSERT INTO TB_Member02 VALUES (LPAD(seq_member02_no.NEXTVAL,4,'0'),'자바킹','123456-1234567','010-0000-0000',sysdate);
+
+--회원 리스트 ( 최근 등록순 )
+SELECT m_no, m_name, m_ssn, m_phoneNum, m_registdate
+FROM TB_Member02 ORDER BY m_registdate DESC;
+
+--회원번호로 검색:
+SELECT m_no, m_name, m_ssn, m_phoneNum, m_registdate
+FROM TB_Member02 WHERE m_no = '0001';
+
+--회원 삭제
+DELETE FROM TB_Member02;
+DELETE FROM TB_Member02 WHERE m_no = '0001';
+
+--회원 수정 
+SELECT m_no, m_name, m_ssn, m_phoneNum, m_registdate
+FROM TB_Member02 WHERE m_no = '0001';
+
+UPDATE TB_Member02 SET m_name='자바신' , m_ssn='123456-1234567', m_phoneNum='010-1111-1111' WHERE m_no='0001'; 
+
+
+
+
+-----------------------------------------------------------------프로시저 작성
+
+
+
+--회원의 정보를 등록하는 프로시저
+create or replace 
+PROCEDURE SP_MEMBER_INSERT(
+	v_name in TB_Member02.m_name%type,
+	v_ssn in TB_Member02.m_ssn%type,
+	v_phoneNum in tb_member02.m_phoneNum%type,
+	RTN_CODE OUT NUMBER -- 결과 코드 반환
+)
+IS
+	v_count NUMBER;
+	e_already_registered EXCEPTION;
+BEGIN
+	select count(m_no) into v_count from TB_Member02 where m_ssn = v_ssn;	
+	if v_count > 0 then
+		raise e_already_registered;
+	else
+		INSERT INTO TB_Member02(m_no, m_name, m_ssn, m_phoneNum, m_registdate)
+		VALUES (LPAD(seq_member02_no.NEXTVAL,4,'0'),v_name,v_ssn,v_phoneNum,sysdate);
+		RTN_CODE := 200; -- 성공
+		commit;
+	end if;	
+	EXCEPTION
+		when e_already_registered then
+		RTN_CODE := 100; -- 중복
+		rollback;
+END;
+/
+
+
+--회원정보를 삭제하는 프로시저 : 전달받은 회원등록번호를 가지고 삭제
+create or replace 
+PROCEDURE SP_MEMBER_DELETE(
+	v_no in varchar2,
+	RTN_CODE OUT NUMBER -- 결과 코드 반환
+)
+IS
+	v_count NUMBER;
+	e_not_found EXCEPTION;
+BEGIN
+	select count(m_no) into v_count from TB_Member02 where m_no = v_no;	
+	if v_count = 0 then
+		raise e_not_found;
+	else
+		Delete from tb_member02 where m_no = v_no;
+		RTN_CODE := 200; -- 성공
+		commit;
+	end if;	
+	EXCEPTION
+		when e_not_found then
+		RTN_CODE := 404; -- 해당 레코드 존재하지 않음.
+		rollback;
+END;
+/
+
+--회원정보 수정하는 프로시저
+create or replace 
+PROCEDURE SP_MEMBER_UPDATE(
+  v_no in varchar2,
+	v_name in TB_Member02.m_name%type,
+	v_ssn in TB_Member02.m_ssn%type,
+	v_phoneNum in tb_member02.m_phoneNum%type,
+	RTN_CODE OUT NUMBER
+)
+IS
+	v_count NUMBER;
+	e_not_found EXCEPTION;
+BEGIN
+	select count(m_no) into v_count from TB_Member02 where m_no = v_no;	
+	if v_count = 0 then
+		raise e_not_found;
+	else
+		update TB_Member02 set m_name=v_name, m_ssn=v_ssn, m_phoneNum=v_phoneNum
+		where m_no = v_no;		
+		RTN_CODE := 200; -- 성공
+		commit;
+	end if;	
+	EXCEPTION
+		when e_not_found then
+		RTN_CODE := 404; --해당레코드가 존재하지 않음.
+		rollback;
+END;
+/
+
+--회원목록을 반환하는 프로시저 
+create or replace 
+PROCEDURE SP_MEMBER_list(
+	rtn_list out SYS_REFCURSOR -- 회원목록 커서로 반환
+	--RTN_CODE OUT NUMBER
+)
+IS
+BEGIN
+	open rtn_list FOR SELECT m_no, m_name, m_ssn, m_phoneNum, m_registdate
+	FROM TB_Member02 ORDER BY m_registdate DESC;	
+END;
+/
+
+
+
+
+--회원등록번호에 해당하는 회원의 정보를 반환하는 프로시저
+create or replace 
+Procedure sp_member_getMember(
+	v_no in TB_Member02.m_no%type,
+	RTN_ROW OUT sys_refcursor -- 검색된 회원 커서로 반환.
+)
+IS
+  v_count NUMBER;	
+	e_already_registered EXCEPTION;
+begin
+  open RTN_ROW for SELECT * FROM TB_Member02 WHERE m_no = v_no; 	
+	
+end;
+/

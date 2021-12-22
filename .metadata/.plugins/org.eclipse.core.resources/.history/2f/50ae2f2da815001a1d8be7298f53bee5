@@ -1,0 +1,57 @@
+package DP;
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+ 
+public class BK2579 {
+	static int dp[];
+	static int score[];
+	// Top-down
+    public static void main(String[] args) {
+//    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//    	try {
+//			int Case = Integer.parseInt(br.readLine());
+//			dp = new int[Case +1];
+//			score = new int[Case + 1];
+//			for(int i =0; i<Case; i++) {
+//				score[i] = Integer.parseInt(br.readLine());
+//			}
+//			System.out.println(stair(Case));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//    }
+    	
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	try {
+			int Case = Integer.parseInt(br.readLine());
+			dp = new int[Case +1];
+			score = new int[Case + 1];
+			for(int i =1; i<=Case; i++) {
+				score[i] = Integer.parseInt(br.readLine());
+			}
+			dp[1] = score[1];
+			dp[2] = score[2];
+			for (int i = 3; i < Case; i++) {
+				dp[n] = Math.max(dp[i-1] + score[n], stair(n-2) + score[n]);
+			}
+			System.out.println(stair(Case));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    static int stair(int n) {
+    	if(n==1) {
+    		dp[n]= score[n];
+    		System.out.println(dp[n]);
+    		return dp[n];
+    	}
+    	if(n==2) return dp[n]= score[n];
+    	dp[n] = Math.max(stair(n-1) + score[n], stair(n-2) + score[n]);
+    	return dp[n];
+    }
+}

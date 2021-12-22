@@ -1,0 +1,8 @@
+package DP;
+
+public class Test {
+	public static void main(String[] args) {
+		int[] dp;
+		Scanner sc = new Scanner(Syetem.in);
+	}
+}
