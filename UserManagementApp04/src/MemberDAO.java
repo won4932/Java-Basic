@@ -28,7 +28,7 @@ public class MemberDAO {
     private void getConnection() throws ClassNotFoundException, SQLException{
         if(conn == null){ //dbConn이 null이면 Connection 객체 얻어오기..
             //접속정보
-            String url = "jdbc:oracle:thin:@192.168.25.2:1521:orcl";
+            String url = "jdbc:oracle:thin:@localhost:1521:orcl";
             String user = "scott";
             String pw = "scott";
            

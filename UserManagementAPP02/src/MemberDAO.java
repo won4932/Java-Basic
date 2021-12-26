@@ -12,7 +12,7 @@ public class MemberDAO {
 	private static final String DRIVER
 		= "oracle.jdbc.driver.OracleDriver";
 	private static final String URL
-		= "jdbc:oracle:thin:@192.168.0.3:1521:ORCL";
+		= "jdbc:oracle:thin:@localhost:1521:ORCL";
 	
 	private static final String USER = "SCOTT"; //DB ID
 	private static final String PASS = "SCOTT"; //DB 패스워드

@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 
 
 public class ChattingClient implements Runnable {
-	String ip = "192.168.25.48";
+	String ip = "localhost";
 	int port =6060;
 	Socket sk; 
 	
