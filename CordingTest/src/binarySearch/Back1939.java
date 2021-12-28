@@ -34,7 +34,7 @@ public class Back1939 {
 			int mid = (left+right)/2;
 			int len = division(mid);
 			
-			if(len>=C) {
+			if(len>=N) {
 				result = mid;
 				left = mid + 1;
 			}
@@ -47,8 +47,8 @@ public class Back1939 {
 	
 	private static int division(int n) {
 		int count = 1;
-		int start = get[0];
-		for(int i : get) {
+		int start = len[0];
+		for(int i : len) {
 			int temp = i-start;
 			if(temp>=n) {
 				count++;
