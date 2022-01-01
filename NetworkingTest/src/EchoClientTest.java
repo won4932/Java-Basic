@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 public class EchoClientTest {
 
 	public static void main(String[] args) throws Exception {
-		String ip = "192.168.25.2";
+		String ip = "127.0.0.1";
 		int port = 7070;
 		
 		Socket sk = new Socket(ip, port);

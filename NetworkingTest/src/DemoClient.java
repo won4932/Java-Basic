@@ -10,7 +10,7 @@ public class DemoClient {
 	public static void main(String[] args) throws Exception {
 		
 		//연결시에 소켓이 생성이된다. 연결이 안될경우에는 예외발생한다.
-		Socket sk = new Socket("192.168.25.37",5050);
+		Socket sk = new Socket("127.0.0.1",5050);
 		System.out.println("서버와 접속이 되었습니다....");
 		
 		InputStream ins = sk.getInputStream();
