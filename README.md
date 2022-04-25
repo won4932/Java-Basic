@@ -3,7 +3,6 @@
 ## 개요
 자바관련 프레임워크 사용을 안하고 소스, 로직기반 그룹별 일회성 소스코드 모음
 - APITest : Naver OpenSource Test
-- CordingTest : 코딩테스트 문제 풀이모음
 - JSP : 안드로이드와 DB간 서버 연결
 - Networking : Soket 및 서버, 클라이언트 개념을 통한 채팅창 개발
 - TestLookAndFeel : swing Open UI를 통한 여러 GUI환경 구성
