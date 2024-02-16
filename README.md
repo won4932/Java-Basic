@@ -2,7 +2,7 @@
 
 ## 개요
 연습용 프로젝트
-- APITest : Naver OpenSource Test
+- APITest : Naver OpenSource Test(파파고(NMT,SMT), 데이터의 랩)
 - JSPIntegration : 안드로이드와 DB간 서버 연결
 - NetworkingTest : Soket 및 서버, 클라이언트 개념을 통한 채팅창 개발
 - TestLookAndFeel : swing Open UI를 통한 여러 GUI환경 구성
