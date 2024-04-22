@@ -1,7 +1,7 @@
 # Java-Basic
 
 ## 개요
-자바관련 프레임워크 사용을 안하고 소스, 로직기반 그룹별 일회성 소스코드 모음
+연습용 프로젝트
 - APITest : Naver OpenSource Test
 - JSPIntegration : 안드로이드와 DB간 서버 연결
 - NetworkingTest : Soket 및 서버, 클라이언트 개념을 통한 채팅창 개발
